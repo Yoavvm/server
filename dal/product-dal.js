@@ -1,0 +1,22 @@
+const { Product } = require('../db/models');
+
+const getAllProducts = async () => {
+    const successfulGetAllProducts = await Product.find();
+    return successfulGetAllProducts;
+}
+
+const addProduct = async (payload) => {
+    const product = await Product(payload);
+    await product.save();
+}
+
+const updateProduct = async (payload) => { 
+    const product = await Product.findByIdAndUpdate(payload._id, {$set: {productName: payload.productName}});
+    await product.save();
+}
+
+module.exports = {
+    getAllProducts,
+    addProduct,
+    updateProduct
+}
