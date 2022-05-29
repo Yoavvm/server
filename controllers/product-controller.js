@@ -5,25 +5,31 @@ const getAllProducts = async (req, res) => {
         const successfulGetAllProducts = await productLogic.getAllProducts()
         res.json(successfulGetAllProducts);
     } catch (error) {
-        res.status(500).json({ error, msg: "something went wrong" });
+        res.status(500).json({ error, msg: error.message });
     }
 }
 
 const addProduct = async (req, res) => {
+    const payload = req.body;
+    payload.token = req.headers.authorization;
+    
     try {
-        await productLogic.addProduct(req.body);
-        res.json({error: false, msg: "successful added product"});
+        await productLogic.addProduct(payload);
+        res.json({ error: false, msg: "successful added product" });
     } catch (error) {
-        res.status(500).json({ error, msg: "something went wrong" });
+        res.status(500).json({ error, msg: error.message });
     }
 }
 
 const updateProduct = async (req, res) => {
+    const payload = req.body;
+    payload.token = req.headers.authorization;
+    
     try {
-        await productLogic.updateProduct(req.body);
-        res.json({error: false, msg: "successful update product"});
+        await productLogic.updateProduct(payload);
+        res.json({ error: false, msg: "successful update product" });
     } catch (error) {
-        res.status(500).json({ error, msg: "something went wrong" });
+        res.status(500).json({ error, msg: error.message });
     }
 }
 

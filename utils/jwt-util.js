@@ -22,8 +22,21 @@ const decodeToken = (token) => {
     return decoded;
 }
 
+
+ const verifyPermission = (token) => {
+    const decoded = decodeToken(token);
+    console.log(decoded);
+
+    if (decoded.role != 'admin') {
+        return false;
+    }
+    
+    return true;
+ }
+
 module.exports = {
     generateToken,
     encryptPassword,
-    decodeToken
+    decodeToken,
+    verifyPermission
 }

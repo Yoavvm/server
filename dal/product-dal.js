@@ -1,6 +1,7 @@
-const { Product } = require('../db/models');
+const { Product, Category } = require('../db/models');
 
 const getAllProducts = async () => {
+    // const successfulGetAllProducts = await Product.find({}, {lookup: {from: Category,  pipeline: [ categoryName ]}});
     const successfulGetAllProducts = await Product.find();
     return successfulGetAllProducts;
 }
